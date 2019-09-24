@@ -1,0 +1,32 @@
+{
+  "name": "@braid/ue-griddle",
+  "version": "0.0.1",
+  "description": "A Vue.js implementation of @braid/griddle-scss with a toggleable visual overlay to help with your front-end development",
+  "main": "src/Griddle.vue",
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wearebraid/vue-griddle.git"
+  },
+  "keywords": [
+    "vue",
+    "vue.js",
+    "grid",
+    "grid",
+    "system",
+    "overlay",
+    "grid",
+    "overlay"
+  ],
+  "author": "Braid LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wearebraid/vue-griddle/issues"
+  },
+  "homepage": "https://github.com/wearebraid/vue-griddle#readme",
+  "dependencies": {
+    "@braid/griddle-scss": "0.0.1"
+  }
+}

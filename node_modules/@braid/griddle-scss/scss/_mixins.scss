@@ -1,0 +1,110 @@
+// function to return a breakpoint value from the breakpoint map
+// remember as "griddle breakpoint" or "get breakpoint"
+// -----------------------------------------------------------------------------
+@function gbp($bp) {
+  @if map-has-key($g-breakpoints, $bp) {
+    @return map-get($g-breakpoints, $bp);
+  }
+  @warn "The breakpoint key '#{$bp}' is not in the map ’$g-breakpoints’";
+  @return null;
+};
+
+// Creates a grid template for showing grid alignment as an overlay.
+// Not required to use griddle, but very helpful for visualizing layout.
+// -----------------------------------------------------------------------------
+%griddle-template {
+  display: grid;
+  grid-template-columns: $g-column-template;
+  grid-column-gap: $g-column-gap;
+  pointer-events: none;
+  z-index: 110;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  right: 1em;
+  bottom: 0;
+  left: 1em;
+
+  @media (min-width: gbp(s)) {
+    left: 1.5em;
+    right: 1.5em;
+  }
+
+  @media (min-width: gbp(m)) {
+    left: 2em;
+    right: 2em;
+  }
+
+  @media (min-width: gbp(l)) {
+    left: $g-column;
+    right: $g-column;
+  }
+
+  @media (min-width: gbp(xl)) {
+    left: 50%;
+    right: auto;
+    transform: translateX($g-max-body-width / -2);
+    width: $g-max-body-width;
+  }
+}
+
+// Creates a root element contained space
+// -----------------------------------------------------------------------------
+@mixin g-container ($container: margin) {
+  #{$container}-left: 1em;
+  #{$container}-right: 1em;
+  max-width: $g-max-body-width;
+
+  @media (min-width: gbp(s)) {
+    #{$container}-left: 1.5em;
+    #{$container}-right: 1.5em;
+  }
+
+  @media (min-width: gbp(m)) {
+    #{$container}-left: 2em;
+    #{$container}-right: 2em;
+  }
+
+  @media (min-width: gbp(l)) {
+    #{$container}-left: $g-column;
+    #{$container}-right: $g-column;
+  }
+
+  @media (min-width: gbp(xl)) {
+    #{$container}-left: auto;
+    #{$container}-right: auto;
+
+    @if $container == padding {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+// Function to create a percentage width spanning n columns.
+// -----------------------------------------------------------------------------
+@function g-span($columns, $extra_gutters: 0, $context: 0) {
+  $gutters: $extra_gutters + ($columns - 1);
+
+  @if $context != 0{
+    @return ((($columns * $g-column) + ($gutters * $g-gutter)) / $context) * 100%;
+  }
+
+  @else {
+    @return (($columns * $g-column) + ($gutters * $g-gutter));
+  }
+}
+
+// Creates a decimal between 0-1 that defines a span of columns
+// -----------------------------------------------------------------------------
+@function g-span-decimal($columns, $extra_gutters: 0, $context: 0) {
+  $gutters: $extra_gutters + ($columns - 1);
+
+  @if $context != 0{
+    @return ((($columns * $g-column-decimal) + ($gutters * $g-gutter-decimal)) / $context);
+  }
+
+  @else {
+    @return (($columns * $g-column-decimal) + ($gutters * $g-gutter-decimal));
+  }
+}

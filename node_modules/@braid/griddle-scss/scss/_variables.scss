@@ -1,0 +1,28 @@
+// Griddle variables
+// feel free to override with your own values in a earlier loaded scss file
+// -----------------------------------------------------------------------------
+$g-breakpoints: (
+  'xs': 375px,
+  's': 575px,
+  'm': 768px,
+  'l': 1024px,
+  'xl': 1380px,
+  'xxl': 1600px
+) !default;
+
+$g-max-body-width: 1312px !default;
+$g-max-column-width: 64px !default;
+$g-max-gutter-width: 32px !default;
+$g-column-count: 14 !default;
+
+// the calculations below are all based on the values above. You should not
+// need to override any variables below this point.
+// -----------------------------------------------------------------------------
+$g-column-decimal: $g-max-column-width / $g-max-body-width;
+$g-gutter-decimal: $g-max-gutter-width / $g-max-body-width;
+
+$g-column: $g-column-decimal * 100%;
+$g-gutter: $g-gutter-decimal * 100%;
+
+$g-column-template: repeat($g-column-count, 1fr);
+$g-column-gap: $g-gutter;
