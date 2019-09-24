@@ -1,2 +1,10 @@
 @import './variables';
 @import './mixins';
+
+.griddle-container {
+  @extend %griddle-template;
+}
+
+.griddle-column {
+  background-color: rgba(red, 0.1);
+}
