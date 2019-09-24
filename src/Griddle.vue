@@ -2,7 +2,7 @@
   <div
     v-if="showGriddle"
     ref="griddle"
-    class="griddle"
+    class="griddle-container"
   >
     <div
       v-for="i in numberOfColumns"
@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       showGriddle: false,
-      numberOfColumns: 12
+      numberOfColumns: 0
     }
   },
   mounted () {
@@ -39,15 +39,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "@braid/griddle-scss/scss/griddle";
-
-.griddle {
-  @extend %griddle-template;
-}
-
-.griddle-column {
-  background-color: rgba(red, 0.1);
-}
-</style>
