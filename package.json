@@ -1,6 +1,6 @@
 {
   "name": "@braid/vue-griddle",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Vue.js implementation of @braid/griddle-scss with a toggleable visual overlay to help with your front-end development",
   "main": "src/Griddle.vue",
   "scripts": {
