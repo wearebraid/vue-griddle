@@ -1,12 +1,15 @@
 # Vue Griddle
-A helpful grid system for your front-end development. Comes with a nifty overlay to help you visualize your project's grid.
+A helpful grid system for your front-end development. Comes with a nifty overlay to help you visualize your project's grid as you're working.
+
+Examples (`control + shift + L` to toggle grid):
+- https://wearebraid.com
 
 # Installation & Configuration
-Vue Griddle depends on your vue project having a webpack build process with the following dependencies:
+Vue Griddle is a semantic grid leveraging Sass meaning it depends on your vue project having a webpack build process with the following dependencies:
 - `node-sass`
 - `sass-loader`
 
-Once you have those installed and properly configured with webpack,install `@braid/vue-griddle` with npm:
+Once those dependencies are installed and properly configured with webpack, install `@braid/vue-griddle` with npm:
 ```bash
 npm install @braid/vue-griddle
 ```
@@ -38,7 +41,7 @@ export default {
 In your global styles, include the `.scss` file for supporting styles and variable definitions:
 
 ```scss
-@import "../../node_modules/@braid/griddle-scss/scss/griddle";
+@import "path/to/node_modules/@braid/griddle-scss/scss/griddle";
 ```
 
 You can override the following variables by declaring your own values *before* the Griddle `.scss` import.
@@ -53,7 +56,8 @@ $g-breakpoints: (
   'xxl': 1600px
 ) !default;
 
-// these values can usually be found in your design program of choice under "layout" or "grid" settings
+// these values can usually be found in your design program of choice under
+// "layout" or "grid" settings
 $g-max-body-width: 1216px !default;
 $g-max-column-width: 72px !default;
 $g-max-gutter-width: 32px !default;
@@ -73,7 +77,7 @@ $g-gutter-decimal
 Once the component is included in your project (as close to the root `html` element as possible) you can toggle the grid visually by hitting `control + shift + L` in your browser. You should see the grid displayed over top of your project.
 
 ## Containers
-Griddle comes with a `g-container` mixin creates a root element constrained to the defined max width (`$g-max-body-width`). `g-container()` takes an argument to choose margin or padding for the area outside of the grid (defaults to margin).
+Griddle comes with a `g-container()` mixin which creates a root element constrained to the defined max width (`$g-max-body-width`). `g-container()` takes an argument to choose margin or padding for the area outside of the grid (defaults to margin).
 
 ```scss
 .row {
@@ -85,7 +89,8 @@ Griddle comes with a `g-container` mixin creates a root element constrained to t
 ```scss
 .row {
   @include g-container(padding);
-  // will use padding for the outside grid area. Useful for full-width section backgrounds.
+  // will use padding for the outside grid area. Useful for full-width
+  // section backgrounds.
 }
 ```
 
@@ -98,7 +103,7 @@ In order to align items to your grid, use the `g-span()` function. The `g-span()
 }
 ```
 
-Using `g-span()` tells your element how many column-widths and (optionally) how many _extra_ gutter-widths you'd like to use for various positional properties. Griddle will do the math and give your properties the correct percentage value. Spans include the gutters between declared columns, so a `g-span(4)` will include 4 column-widths and 3 gutter-widths automatically.
+Using `g-span()` tells your element how many column-widths and (optionally) how many _extra_ gutter-widths you'd like to use for various positional properties. Griddle will do the math and give your properties the correct percentage value. Spans include the gutters between declared columns, so a `g-span(4)` will be the sum of 4 column-widths and the 3 gutter-widths that exist between those 4 columns.
 
 The context (optional) is assumed to be the full `$g-max-body-width` unless you specify otherwise. The context argument is used to calculate root grid-column and grid-gutter widths while inside of a non-`$g-max-body-width` element.
 
@@ -109,30 +114,37 @@ Examples:
   width: g-span(12);
 }
 
-// Assuming a 12-column grid, create an element that is centered at 1/3 the grid width
+// Assuming a 12-column grid, create an element that is centered at
+// 1/3 the grid width
 .my-div {
   width: g-span(4);
   margin-left: g-span(4);
 }
 
-// assuming a 12-column grid, create an element that spans 4 columns and one extra gutter width
+// assuming a 12-column grid, create an element that spans 4 columns
+// and one extra gutter width
 .my-div {
   width: g-span(4, 1);
 }
 
-// assuming a 12-column grid, create an element that spans 6 columns but is pulled to the left by a negative gutter width
+// assuming a 12-column grid, create an element that spans 6 columns
+// but is pulled to the left by a negative gutter width
 .my-div {
   width: g-span(6, 1);
   margin-left: - $g-gutter;
 }
 
-// Sometimes you want a parent that is X root columns wide, with children that are each Y root columns wide. This is where the context argument applies.
+// Sometimes you want a parent that is X root columns wide, with children
+// that are each Y root columns wide. This is where the context argument applies.
 .my-parent-div {
   // set a value that is less that the max grid width
   width: g-span(9);
 
   .my-children {
-    // in order to calculate the correct percentage width of root columns (e.g. 3-of-12 root columns) rather than getting a percent of the 9-of-12 column parent element, pass in the correct context width as a third argument
+    // in order to calculate the correct percentage width of root columns
+    // (e.g. 3-of-12 root columns) rather than getting a percent of the
+    // 9-of-12 column parent element, pass in the correct context width
+    // as a third argument
     width: g-span(3, 0, g-span(9))
   }
 }
@@ -146,7 +158,8 @@ In order to use the breakpoints that come with Griddle use the provided `gbp()` 
 example:
 ```scss
 .my-div {
-  // assuming a 12-column grid, define an element that gets progressively narrower as screen size increases, but remains centered.
+  // assuming a 12-column grid, define an element that gets progressively
+  // narrower as screen size increases, but remains centered.
   width: span(12);
 
   @media (min-width: gbp(m)) {
@@ -165,7 +178,8 @@ Griddle uses the default breakpoint values to define various level of insetting 
 
 ```scss
 .my-special-div {
-  // assuming a 12-column grid, define an element that gets progressively narrower as screen size increases, but remains centered.
+  // assuming a 12-column grid, define an element that gets progressively
+  // narrower as screen size increases, but remains centered.
   width: span(12);
 
   @media (min-width: 600px) {
