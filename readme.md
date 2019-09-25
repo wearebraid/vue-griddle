@@ -169,7 +169,7 @@ Examples:
 // but is pulled to the left by a negative gutter width
 .my-div {
   width: g-span(6, 1);
-  margin-left: - $g-gutter;
+  margin-left: - g-span(0, 1);
 }
 
 // Sometimes you want a parent that is X root columns wide, with children
