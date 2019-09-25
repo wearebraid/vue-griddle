@@ -44,24 +44,62 @@ In your global styles, include the `.scss` file for supporting styles and variab
 @import "path/to/node_modules/@braid/griddle-scss/scss/griddle";
 ```
 
-You can override the following variables by declaring your own values *before* the Griddle `.scss` import.
+In order for the overlay to show, you probably want to include the base overlay styling as well:
 
 ```scss
-$g-breakpoints: (
-  'xs': 375px,
-  's': 575px,
-  'm': 768px,
-  'l': 1024px,
-  'xl': 1380px,
-  'xxl': 1600px
-) !default;
+@import "path/to/node_modules/@braid/griddle-scss/scss/griddle-default-overlay";
+```
 
+All combined together, your structure will probably look something like this:
+
+```scss
+@import "griddle-overrides";
+@import "path/to/node_modules/@braid/griddle-scss/scss/griddle";
+@import "path/to/node_modules/@braid/griddle-scss/scss/griddle-default-overlay";
+@import "another-sass-file";
+@import "another-sass-file";
+// etc
+```
+
+You can override the following variables by declaring your own values *before* the Griddle `.scss` import. it is recommended to put these overrides into their own file so that you can easily ensure that they come immediately before the main `griddle.scss` file.
+
+```scss
 // these values can usually be found in your design program of choice under
 // "layout" or "grid" settings
-$g-max-body-width: 1216px !default;
 $g-max-column-width: 72px !default;
 $g-max-gutter-width: 32px !default;
 $g-column-count: 12 !default;
+$g-max-body-width: ($g-column-count * $g-max-column-width) + (($g-column-count - 1) * $g-max-gutter-width) !default;
+
+$g-breakpoints: (
+  'base': (
+    'inset': 1em
+  ),
+  'xs': (
+    'width': 375px,
+    'inset': 1em,
+  ),
+  's': (
+    'width': 575px,
+    'inset': 1.5em
+  ),
+  'm': (
+    'width': 768px,
+    'inset': 2em
+  ),
+  'l': (
+    'width': 1024px,
+    'inset': ($g-max-column-width / $g-max-body-width) * 100%
+  ),
+  'xl': (
+    'width': 1380px,
+    'inset': auto
+  ),
+  'xxl': (
+    'width': 1600px,
+    'inset': auto
+  )
+) !default;
 ```
 
 The following variables are available for your use and are calculated based on the values defined above
