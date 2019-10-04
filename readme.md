@@ -98,6 +98,10 @@ $g-breakpoints: (
   'xxl': (
     'width': 1600px,
     'inset': auto
+  ),
+  'max-body': (
+    'width': $g-max-body-width + ($g-max-column-width * 2),
+    'inset': auto
   )
 ) !default;
 ```
@@ -115,33 +119,25 @@ $g-gutter-decimal
 Once the component is included in your project (as close to the root `html` element as possible) you can toggle the grid visually by hitting `control + shift + L` in your browser. You should see the grid displayed over top of your project.
 
 ## Containers
-Griddle comes with a `g-container()` mixin which creates a root element constrained to the defined max width (`$g-max-body-width`). `g-container()` takes an argument to choose margin or padding for the area outside of the grid (defaults to margin).
+Griddle comes with a `container()` mixin which creates a root element constrained to the defined max width (`$g-max-body-width`).
 
 ```scss
 .row {
-  @include g-container();
+  @include container();
   // will use margin for outside grid area
 }
 ```
 
-```scss
-.row {
-  @include g-container(padding);
-  // will use padding for the outside grid area. Useful for full-width
-  // section backgrounds.
-}
-```
-
 ## Spans (aka Columns)
-In order to align items to your grid, use the `g-span()` function. The `g-span()` function takes three arguments:
+In order to align items to your grid, use the `span()` function. The `span()` function takes three arguments:
 
 ```scss
 .my-div {
-  width: g-span($columns, $extra_gutters (optional), $context (optional));
+  width: span($columns, $extra_gutters (optional), $context (optional));
 }
 ```
 
-Using `g-span()` tells your element how many column-widths and (optionally) how many _extra_ gutter-widths you'd like to use for various positional properties. Griddle will do the math and give your properties the correct percentage value. Spans include the gutters between declared columns, so a `g-span(4)` will be the sum of 4 column-widths and the 3 gutter-widths that exist between those 4 columns.
+Using `span()` tells your element how many column-widths and (optionally) how many _extra_ gutter-widths you'd like to use for various positional properties. Griddle will do the math and give your properties the correct percentage value. Spans include the gutters between declared columns, so a `span(4)` will be the sum of 4 column-widths and the 3 gutter-widths that exist between those 4 columns.
 
 The context (optional) is assumed to be the full `$g-max-body-width` unless you specify otherwise. The context argument is used to calculate root grid-column and grid-gutter widths while inside of a non-`$g-max-body-width` element.
 
@@ -149,49 +145,49 @@ Examples:
 ```scss
 // assuming a 12-column grid, create a full width element
 .my-div {
-  width: g-span(12);
+  width: span(12);
 }
 
 // Assuming a 12-column grid, create an element that is centered at
 // 1/3 the grid width
 .my-div {
-  width: g-span(4);
-  margin-left: g-span(4);
+  width: span(4);
+  margin-left: span(4);
 }
 
 // assuming a 12-column grid, create an element that spans 4 columns
 // and one extra gutter width
 .my-div {
-  width: g-span(4, 1);
+  width: span(4, 1);
 }
 
 // assuming a 12-column grid, create an element that spans 6 columns
 // but is pulled to the left by a negative gutter width
 .my-div {
-  width: g-span(6, 1);
-  margin-left: - g-span(0, 1);
+  width: span(6, 1);
+  margin-left: - span(0, 1);
 }
 
 // Sometimes you want a parent that is X root columns wide, with children
 // that are each Y root columns wide. This is where the context argument applies.
 .my-parent-div {
   // set a value that is less that the max grid width
-  width: g-span(9);
+  width: span(9);
 
   .my-children {
     // in order to calculate the correct percentage width of root columns
     // (e.g. 3-of-12 root columns) rather than getting a percent of the
     // 9-of-12 column parent element, pass in the correct context width
     // as a third argument
-    width: g-span(3, 0, g-span(9))
+    width: span(3, 0, span(9))
   }
 }
 ```
 
-In the event you ever need a decimal value to work with rather than a percent, simply use `g-span-decimal()` which takes the same arguments as `g-span()`.
+In the event you ever need a decimal value to work with rather than a percent, simply use `span-decimal()` which takes the same arguments as `span()`.
 
 ## Breakpoints
-In order to use the breakpoints that come with Griddle use the provided `gbp()` (griddle-breakpoint) function which will access a breakpoint value by name from the `$g-breakpoints` map (you can define your own by declaring the value of `$g-breakpoints` before importing the griddle `.scss` file).
+In order to use the breakpoints that come with Griddle use the provided `bp()` function which will access a breakpoint value by name from the `$g-breakpoints` map (you can define your own by declaring the value of `$g-breakpoints` before importing the griddle `.scss` file).
 
 example:
 ```scss
@@ -200,12 +196,12 @@ example:
   // narrower as screen size increases, but remains centered.
   width: span(12);
 
-  @media (min-width: gbp(m)) {
+  @media (min-width: bp(m)) {
     width: span(10);
     margin-left: span(1, 1);
   }
 
-  @media (min-width: gbp(xl)) {
+  @media (min-width: bp(xl)) {
     width: span(8);
     margin-left: span(2, 1);
   }
