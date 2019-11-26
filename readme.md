@@ -3,7 +3,7 @@ A helpful grid system for your front-end development. Comes with a nifty overlay
 
 ![Griddle Example](/img/braid-grid.mov.gif "Griddle on https://www.wearebraid.com")
 
-Examples (`control + shift + L` to toggle grid):
+Live Examples (`control + shift + L` to toggle grid):
 - https://wearebraid.com
 - https://www.gardenary.com
 
