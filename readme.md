@@ -1,8 +1,12 @@
 # Vue Griddle
 A helpful grid system for your front-end development. Comes with a nifty overlay to help you visualize your project's grid as you're working.
 
+![Griddle Example](/img/braid-grid.mov.gif "Griddle on https://www.wearebraid.com")
+
 Examples (`control + shift + L` to toggle grid):
 - https://wearebraid.com
+- https://www.gardenary.com
+
 
 # Installation & Configuration
 Vue Griddle is a semantic grid leveraging Sass meaning it depends on your vue project having a webpack build process with the following dependencies:
