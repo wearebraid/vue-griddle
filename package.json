@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/wearebraid/vue-griddle#readme",
   "dependencies": {
-    "@braid/griddle-scss": "^0.1.0"
+    "@braid/griddle-scss": "^0.1.1"
   }
 }
