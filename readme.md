@@ -3,4 +3,4 @@ There's a new 1.0 re-write of Griddle and it's available [here](https://github.c
 
 # ⚠️ ______________________________________________________ ⚠️
 
-you can access the old readme from this repo here: [old Readme.md](./old-readme.md)
+you can access the old readme from this repo here: [Old Readme.md](./old-readme.md)
